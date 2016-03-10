@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # template for "Stopwatch: The Game"
 
 import simplegui

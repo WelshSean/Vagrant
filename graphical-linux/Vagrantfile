@@ -13,7 +13,21 @@ Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "box-cutter/centos70"
-  config.vm.provision :shell, path: "bootstrap.sh"
+  #config.vm.provision :shell, path: "bootstrap.sh"
+  config.vm.provision "shell", inline: <<-SHELL        
+    #Install Virtual Box guest additions from rpmfusion repos
+    cd /vagrant
+    yum install -y rpmfusion-free-release-20.noarch.rpm 
+    yum install -y rpmfusion-nonfree-release-20.noarch.rpm
+    yum update -y
+    yum install -y VirtualBox-guest
+
+    #Add XFCE desktop to fedora server
+    yum groups mark install 'graphical_environment'
+    yum groupinstall -y "Xfce"
+    yum install -y xorg-x11-drivers   
+SHELL
+
   config.vm.network :forwarded_port, guest: 80, host: 4567
 
   # Disable automatic box update checking. If you disable this, then

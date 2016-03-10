@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 # Rock-paper-scissors-lizard-Spock template
 
 
